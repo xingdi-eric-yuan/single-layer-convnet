@@ -32,7 +32,7 @@ using namespace std;
 // Pooling methods
 #define POOL_MAX 0
 #define POOL_MEAN 1
-#define POOL_STOCHASTIC 2
+#define POOL_MAX 2
 
 #define ATD at<double>
 #define elif else if
