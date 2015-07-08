@@ -309,7 +309,7 @@ Pooling(Mat &M, int pVert, int pHori, int poolingMethod, vector<Point> &locat, b
     for(int i=0; i<res.rows; i++){
         for(int j=0; j<res.cols; j++){
             Mat temp;
-            Rect roi = Rect(j * pVert, i * pHori, pVert, pHori);
+            Rect roi = Rect(j * pHori, i * pVert, pHori, pVert);
             newM(roi).copyTo(temp);
             double val;
             // for Max Pooling
@@ -320,7 +320,7 @@ Pooling(Mat &M, int pVert, int pHori, int poolingMethod, vector<Point> &locat, b
                 Point maxLoc;
                 minMaxLoc( temp, &minVal, &maxVal, &minLoc, &maxLoc );
                 val = maxVal;
-                locat.push_back(Point(maxLoc.x + j * pVert, maxLoc.y + i * pHori));
+                locat.push_back(Point(maxLoc.x + j * pHori, maxLoc.y + i * pVert));
             }elif(POOL_MEAN == poolingMethod){
                 // Mean Pooling
                 val = sum(temp)[0] / (pVert * pHori);
@@ -341,7 +341,7 @@ Pooling(Mat &M, int pVert, int pHori, int poolingMethod, vector<Point> &locat, b
                     ran *= maxVal;
                     Point loc = findLoc(ran, prob);
                     val = temp.ATD(loc.y, loc.x);
-                    locat.push_back(Point(loc.x + j * pVert, loc.y + i * pHori));
+                    locat.push_back(Point(loc.x + j * pHori, loc.y + i * pVert));
                 }
 
             }
